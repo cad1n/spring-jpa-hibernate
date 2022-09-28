@@ -1,7 +1,6 @@
 package com.study.springjpahibernate.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.aspectj.weaver.ast.Or;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
