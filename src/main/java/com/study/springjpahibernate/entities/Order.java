@@ -3,6 +3,7 @@ package com.study.springjpahibernate.entities;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.study.springjpahibernate.entities.enums.OrderStatus;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.Instant;
@@ -84,6 +86,14 @@ public class Order implements Serializable {
         this.client = client;
     }
 
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
+
     public Set<OrderItem> getItems() {
         return items;
     }
@@ -91,6 +101,9 @@ public class Order implements Serializable {
     public void setItems(Set<OrderItem> items) {
         this.items = items;
     }
+
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private Payment payment;
 
     @Override
     public boolean equals(Object o) {
