@@ -1,6 +1,5 @@
 package com.study.springjpahibernate.entities.enums;
 
-import org.aspectj.weaver.ast.Or;
 
 public enum OrderStatus {
     WAITING_PAYMENT(1),
