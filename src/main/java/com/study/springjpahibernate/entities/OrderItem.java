@@ -1,5 +1,6 @@
 package com.study.springjpahibernate.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.study.springjpahibernate.entities.pk.OrderItemPK;
 
 import javax.persistence.EmbeddedId;
@@ -18,7 +19,7 @@ public class OrderItem implements Serializable {
 
     @EmbeddedId
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private OrderItemPK id;
+    private OrderItemPK id = new OrderItemPK();
     private Integer quantity;
     private double price;
 
@@ -32,6 +33,7 @@ public class OrderItem implements Serializable {
         this.price = price;
     }
 
+    @JsonIgnore
     public Order getOrder() {
         return id.getOrder();
     }
