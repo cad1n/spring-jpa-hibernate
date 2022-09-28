@@ -2,6 +2,7 @@ package com.study.springjpahibernate.services;
 
 import com.study.springjpahibernate.entities.User;
 import com.study.springjpahibernate.repositories.UserRepository;
+import com.study.springjpahibernate.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class UserService {
 
     public User findById(Long id) {
         Optional<User> obj = repository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public User insert(User obj) {
@@ -31,7 +32,7 @@ public class UserService {
         repository.deleteById(id);
     }
 
-    public User update(Long id, User obj){
+    public User update(Long id, User obj) {
         User entity = repository.getOne(id);
         updateData(entity, obj);
         return repository.save(entity);
