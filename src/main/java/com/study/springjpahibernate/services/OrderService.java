@@ -2,6 +2,7 @@ package com.study.springjpahibernate.services;
 
 import com.study.springjpahibernate.entities.Order;
 import com.study.springjpahibernate.repositories.OrderRepository;
+import com.study.springjpahibernate.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,6 @@ public class OrderService {
 
     public Order findById(Long id) {
         Optional<Order> obj = repository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 }
