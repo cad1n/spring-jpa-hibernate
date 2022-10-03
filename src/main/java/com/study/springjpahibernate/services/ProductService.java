@@ -2,6 +2,7 @@ package com.study.springjpahibernate.services;
 
 import com.study.springjpahibernate.entities.Product;
 import com.study.springjpahibernate.repositories.ProductRepository;
+import com.study.springjpahibernate.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,6 @@ public class ProductService {
 
     public Product findById(Long id) {
         Optional<Product> obj = repository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 }
